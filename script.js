@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
   }
 
-  const map = L.map('map').setView([39.5, -5.0], 6);
+  const map = L.map('map', { zoomControl: false }).setView([39.5, -5.0], 6); // Disable default
+  L.control.zoom({ position: 'bottomleft' }).addTo(map); // Add new one
   const itineraryListElement = document.getElementById('itinerary-list');
   const loadingIndicator = document.getElementById('loading-indicator');
   const clearCacheButton = document.getElementById('clear-cache-button');

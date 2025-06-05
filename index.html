@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Travel Dashboard - Iberia Trip</title>
+    <title>Interactive Travel Itinerary - Iberia Trip</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,40 +20,75 @@
     <div class="app-container">
         <div id="map-container">
             <div id="map"></div>
-            <div id="loading-indicator" class="hidden">Fetching route data...</div>
+            <div id="loading-indicator" class="hidden">Loading Itinerary...</div>
+            <div id="map-controls">
+                <div class="map-type-selector">
+                    <label for="map-type"><i class="fas fa-layer-group"></i></label>
+                    <select id="map-type">
+                        <option value="osm">Street Map</option>
+                        <option value="satellite">Satellite</option>
+                        <option value="topo">Topographic</option>
+                        <option value="dark">Dark Mode</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div id="info-panel">
             <div class="panel-header">
-                <h2 id="info-panel-title">Route Details</h2> <div class="header-buttons">
-                    <button id="back-to-routes-button" class="button-style hidden">Back to Routes</button>
-                    <button id="clear-cache-button" class="button-style">Clear Route Cache</button>
+                <!-- Home, Prev, Next buttons will be controlled by JS for visibility -->
+                <button id="home-button" class="button-style nav-button hidden"><i class="fas fa-home"></i> Home</button>
+                <div class="navigation-buttons">
+                    <button id="prev-item-button" class="button-style nav-button hidden"><i class="fas fa-chevron-left"></i> Prev</button>
+                    <button id="next-item-button" class="button-style nav-button hidden">Next <i class="fas fa-chevron-right"></i></button>
                 </div>
+                <button id="clear-cache-button" class="button-style"><i class="fas fa-trash-alt"></i> Clear Cache</button>
             </div>
+            
+            <!-- Container for dynamic content (either list or details) -->
+            <div id="panel-content-area">
+                <div id="itinerary-list-container" class="info-section">
+                    <h3>Full Itinerary</h3>
+                    <div id="itinerary-list">
+                        <!-- Itinerary items will be populated here -->
+                    </div>
+                </div>
 
-            <div id="route-info-section" class="info-section">
-                <div id="route-list"></div>
-            </div>
+                <div id="item-details-section" class="info-section hidden">
+                    <!-- City Details View -->
+                    <div id="city-info-view" class="hidden">
+                        <h4><i class="fas fa-city"></i> <span id="active-city-name">City</span></h4>
+                        <p><strong><i class="fas fa-calendar-alt"></i> Stay:</strong> <span id="city-stay-dates">N/A</span></p>
+                        <div class="tab-navigation">
+                            <button class="tab-button active" data-tab="sights"><i class="fas fa-landmark"></i> Sights</button>
+                            <button class="tab-button" data-tab="must-dos"><i class="fas fa-star"></i> Must-Do's</button>
+                            <button class="tab-button" data-tab="activities"><i class="fas fa-hiking"></i> Activities</button>
+                            <button class="tab-button" data-tab="food"><i class="fas fa-utensils"></i> Food</button>
+                            <button class="tab-button" data-tab="restaurants-bars"><i class="fas fa-wine-glass-alt"></i> Eat & Drink</button>
+                            <button class="tab-button" data-tab="tips"><i class="fas fa-lightbulb"></i> Tips</button>
+                        </div>
+                        <div class="tab-content">
+                            <div id="sights-content" class="tab-pane active"></div>
+                            <div id="must-dos-content" class="tab-pane"></div>
+                            <div id="activities-content" class="tab-pane"></div>
+                            <div id="food-content" class="tab-pane"></div>
+                            <div id="restaurants-bars-content" class="tab-pane"></div>
+                            <div id="tips-content" class="tab-pane"></div>
+                        </div>
+                    </div>
 
-            <div id="city-details-section" class="info-section hidden">
-                <div class="tab-navigation">
-                    <button class="tab-button active" data-tab="sights">Sights</button>
-                    <button class="tab-button" data-tab="must-dos">Must-Do's</button>
-                    <button class="tab-button" data-tab="activities">Activities</button>
-                    <button class="tab-button" data-tab="food">Food</button>
-                    <button class="tab-button" data-tab="restaurants-bars">Eat & Drink</button>
-                    <button class="tab-button" data-tab="tips">Tips & Warnings</button>
+                    <!-- Route Details View -->
+                    <div id="route-info-view" class="hidden">
+                        <h4><i class="fas fa-route"></i> Travel Leg: <span id="active-route-description">Route</span></h4>
+                        <p><strong><i class="fas fa-calendar-day"></i> Travel Date:</strong> <span id="route-travel-date">N/A</span></p>
+                        <p><strong><i class="fa-solid fa-arrow-right-from-bracket"></i> Departure:</strong> <span id="route-departure-city">N/A</span> at <span id="route-departure-time">N/A</span></p>
+                        <p><strong><i class="fa-solid fa-arrow-right-to-bracket"></i> Arrival:</strong> <span id="route-arrival-city">N/A</span> around <span id="route-arrival-time">N/A</span></p>
+                        <p><strong><i class="fas fa-stopwatch"></i> Est. Travel Time:</strong> <span id="route-travel-duration">N/A</span></p>
+                        <p id="route-notes-container" class="hidden"><strong><i class="fas fa-sticky-note"></i> Notes:</strong> <span id="route-notes-text"></span></p>
+                    </div>
                 </div>
-                <div class="tab-content">
-                    <div id="sights-content" class="tab-pane active"></div>
-                    <div id="must-dos-content" class="tab-pane"></div>
-                    <div id="activities-content" class="tab-pane"></div>
-                    <div id="food-content" class="tab-pane"></div>
-                    <div id="restaurants-bars-content" class="tab-pane"></div>
-                    <div id="tips-content" class="tab-pane"></div>
+                <div id="no-item-selected" class="info-section hidden"> <!-- Initially hidden or shown based on JS logic -->
+                    <p>Select an item from the itinerary list or use Prev/Next to view details.</p>
                 </div>
-            </div>
-             <div id="no-city-selected" class="info-section hidden">
-                <p>Select a route or a city marker on the map to see details.</p>
             </div>
         </div>
     </div>
@@ -60,7 +96,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
-
     <script src="script.js"></script>
 </body>
 </html>

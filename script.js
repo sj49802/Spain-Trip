@@ -21,8 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
       return; // Stop further execution
   }
 
-  const map = L.map('map', { zoomControl: false }).setView([39.5, -5.0], 6); 
+  // Initialize the map
+  // ADDED attributionControl: false to hide the attribution text
+  const map = L.map('map', { zoomControl: false, attributionControl: false }).setView([39.5, -5.0], 6); 
   L.control.zoom({ position: 'bottomleft' }).addTo(map); 
+
   const itineraryListElement = document.getElementById('itinerary-list');
   const loadingIndicator = document.getElementById('loading-indicator');
   const clearCacheButton = document.getElementById('clear-cache-button');
@@ -62,21 +65,25 @@ document.addEventListener('DOMContentLoaded', function () {
   let allRoutePolylines = {}; 
 
   // --- Map Tile Layers ---
+  // REMOVED individual attribution strings from tile layers as global attribution is off.
+  // You MUST ensure you are compliant with the tile provider's terms of service if you hide attribution.
+  // Typically, some form of attribution is required. This change is purely technical.
   const tileLayers = {
       osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors' // Shortened
+          // attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors' // Removed
       }),
       satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 19,
-          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, etc.'
+          // attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, etc.' // Removed
       }),
       topo: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
           maxZoom: 17,
-          attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>, SRTM | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)'
+          // attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>, SRTM | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)' // Removed
       }),
       dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; OSM contributors &copy; CARTO', subdomains: 'abcd', maxZoom: 19
+          // attribution: '&copy; OSM contributors &copy; CARTO', // Removed
+          subdomains: 'abcd', maxZoom: 19
       })
   };
   function setMapTileLayer(type) {

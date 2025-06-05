@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Travel Dashboard - Iberia Trip</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div id="map-container">
+            <div id="map"></div>
+            <div id="loading-indicator" class="hidden">Fetching route data...</div>
+        </div>
+        <div id="info-panel">
+            <div class="panel-header">
+                <h2 id="info-panel-title">Route Details</h2> <div class="header-buttons">
+                    <button id="back-to-routes-button" class="button-style hidden">Back to Routes</button>
+                    <button id="clear-cache-button" class="button-style">Clear Route Cache</button>
+                </div>
+            </div>
+
+            <div id="route-info-section" class="info-section">
+                <div id="route-list"></div>
+            </div>
+
+            <div id="city-details-section" class="info-section hidden">
+                <div class="tab-navigation">
+                    <button class="tab-button active" data-tab="sights">Sights</button>
+                    <button class="tab-button" data-tab="must-dos">Must-Do's</button>
+                    <button class="tab-button" data-tab="activities">Activities</button>
+                    <button class="tab-button" data-tab="food">Food</button>
+                    <button class="tab-button" data-tab="restaurants-bars">Eat & Drink</button>
+                    <button class="tab-button" data-tab="tips">Tips & Warnings</button>
+                </div>
+                <div class="tab-content">
+                    <div id="sights-content" class="tab-pane active"></div>
+                    <div id="must-dos-content" class="tab-pane"></div>
+                    <div id="activities-content" class="tab-pane"></div>
+                    <div id="food-content" class="tab-pane"></div>
+                    <div id="restaurants-bars-content" class="tab-pane"></div>
+                    <div id="tips-content" class="tab-pane"></div>
+                </div>
+            </div>
+             <div id="no-city-selected" class="info-section hidden">
+                <p>Select a route or a city marker on the map to see details.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <script src="script.js"></script>
+</body>
+</html>

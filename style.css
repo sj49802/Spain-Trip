@@ -1,4 +1,3 @@
-/* style.css */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -14,15 +13,25 @@ body {
 
 .app-container {
     display: flex;
-    width: 98%;
+    width: 100%; /* Changed from 98% for better edge-to-edge on mobile */
     max-width: 1800px;
-    height: 95vh;
-    max-height: 950px;
+    height: 100vh; /* Changed from 95vh for better edge-to-edge on mobile */
+    max-height: 100vh; /* Allow full height */
     background-color: #ffffff;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
+    border-radius: 0; /* No border radius on mobile for full screen feel */
     overflow: hidden;
 }
+
+@media (min-width: 769px) { /* Styles for desktop */
+    .app-container {
+        width: 98%;
+        height: 95vh;
+        max-height: 950px;
+        border-radius: 12px;
+    }
+}
+
 
 #map-container {
     flex: 2.5;
@@ -38,13 +47,13 @@ body {
 
 #map-controls {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 10px; /* Adjusted for mobile */
+    left: 10px; /* Adjusted for mobile */
     z-index: 1000;
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 8px 12px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    padding: 6px 10px; /* Adjusted for mobile */
+    border-radius: 6px; /* Adjusted for mobile */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Adjusted for mobile */
 }
 
 .map-type-selector {
@@ -53,17 +62,17 @@ body {
 }
 
 .map-type-selector label {
-    margin-right: 8px;
+    margin-right: 6px; /* Adjusted for mobile */
     color: #333;
-    font-size: 1.1em;
+    font-size: 1em; /* Adjusted for mobile */
 }
 
 .map-type-selector select {
-    padding: 6px 8px;
-    border-radius: 5px;
+    padding: 5px 7px; /* Adjusted for mobile */
+    border-radius: 4px; /* Adjusted for mobile */
     border: 1px solid #ccc;
     font-family: 'Inter', sans-serif;
-    font-size: 0.9em;
+    font-size: 0.85em; /* Adjusted for mobile */
     background-color: #fff;
 }
 
@@ -74,61 +83,61 @@ body {
     transform: translate(-50%, -50%);
     background-color: rgba(33, 37, 41, 0.85);
     color: white;
-    padding: 18px 30px;
+    padding: 15px 25px; /* Adjusted for mobile */
     border-radius: 8px;
     z-index: 10000;
-    font-size: 1.05em;
+    font-size: 1em; /* Adjusted for mobile */
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    text-align: center;
 }
 
 #info-panel {
     flex: 1.5;
-    padding: 20px;
+    padding: 15px; /* Base padding, will be adjusted */
     background-color: #fdfdff;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Prevent info-panel scroll, child will scroll */
+    overflow: hidden; 
 }
 
 .panel-header {
     display: flex;
-    justify-content: space-between; /* Distribute space for home, nav, clear */
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+    margin-bottom: 10px; /* Adjusted for mobile */
+    padding-bottom: 10px; /* Adjusted for mobile */
     border-bottom: 1px solid #e0e0e0;
-    gap: 10px;
-    flex-shrink: 0; /* Prevent header from shrinking */
+    gap: 8px; /* Adjusted for mobile */
+    flex-shrink: 0;
+    flex-wrap: nowrap; /* Prevent wrapping on desktop initially */
 }
-
-/* This h2 is no longer used for dynamic titles based on feedback */
-/* .panel-header h2 { ... } */
 
 .navigation-buttons {
     display: flex;
-    gap: 8px;
-    margin: 0 auto; /* Center Prev/Next if Home is on one side and Clear on other */
+    gap: 6px; /* Adjusted for mobile */
+    margin: 0 auto; 
 }
 #home-button {
-    margin-right: auto; /* Pushes Home button to the left */
+    margin-right: auto; 
 }
 
 .button-style {
     background-color: #6c757d;
     color: white;
     border: none;
-    padding: 9px 14px;
-    border-radius: 6px;
+    padding: 8px 12px; /* Adjusted for mobile */
+    border-radius: 5px; /* Adjusted for mobile */
     cursor: pointer;
-    font-size: 0.85em;
+    font-size: 0.8em; /* Adjusted for mobile */
     font-weight: 500;
     transition: background-color 0.2s ease, transform 0.1s ease;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center; /* Center content in button */
+    gap: 5px; /* Adjusted for mobile */
 }
-.button-style.nav-button { /* Specific for Home, Prev, Next */
+.button-style.nav-button { 
     background-color: #007bff;
 }
 .button-style.nav-button:hover {
@@ -136,7 +145,7 @@ body {
 }
 
 .button-style i {
-    font-size: 0.95em;
+    font-size: 0.9em; /* Adjusted for mobile */
 }
 
 .button-style:hover {
@@ -149,69 +158,68 @@ body {
 
 #clear-cache-button {
     background-color: #dc3545;
-    /* margin-left: auto; /* Pushed to the right by default */
 }
 #clear-cache-button:hover {
     background-color: #c82333;
 }
 
-/* This div will hold either the list or the details, and will be scrollable */
 #panel-content-area {
     flex-grow: 1;
-    overflow-y: auto; /* Allow scrolling for the content area */
-    display: flex; /* To manage visibility of children */
-    flex-direction: column; /* Stack children vertically */
+    overflow-y: auto; 
+    display: flex; 
+    flex-direction: column; 
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 
-.info-section { /* This class is now on list-container and details-section */
-    /* margin-bottom: 15px; Remove bottom margin if it's the main filling content */
-    width: 100%; /* Ensure it takes full width */
+.info-section { 
+    width: 100%; 
 }
 
 #itinerary-list-container {
-    /* This will be shown/hidden by JS. When shown, it should fill the panel-content-area */
     display: flex;
     flex-direction: column;
-    height: 100%; /* Try to make it take full height of parent */
+    height: 100%; 
 }
 #itinerary-list-container h3 {
-    font-size: 1.2em;
+    font-size: 1.1em; /* Adjusted for mobile */
     color: #0056b3;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Adjusted for mobile */
     padding-bottom: 5px;
     border-bottom: 1px solid #b3d1ff;
-    flex-shrink: 0; /* Prevent shrinking */
+    flex-shrink: 0; 
 }
 
 #itinerary-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    flex-grow: 1; /* Allow list to take remaining space */
-    overflow-y: auto; /* Make the list itself scrollable */
+    gap: 6px; /* Adjusted for mobile */
+    flex-grow: 1; 
+    overflow-y: auto; 
     border: 1px solid #e9ecef;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 8px; /* Adjusted for mobile */
+    border-radius: 6px; /* Adjusted for mobile */
     background-color: #fff;
 }
 
 .itinerary-item {
-    padding: 10px 12px;
+    padding: 8px 10px; /* Adjusted for mobile */
     border: 1px solid #e9ecef;
-    border-radius: 6px;
+    border-radius: 5px; /* Adjusted for mobile */
     cursor: pointer;
     transition: background-color 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
-    border-left: 4px solid transparent;
-    font-size: 0.9em;
+    border-left: 3px solid transparent; /* Adjusted for mobile */
+    font-size: 0.85em; /* Adjusted for mobile */
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-shrink: 0; /* Prevent items from shrinking */
+    gap: 6px; /* Adjusted for mobile */
+    flex-shrink: 0; 
 }
 .itinerary-item i {
     color: #007bff;
+    min-width: 16px; /* Ensure icon alignment */
+    text-align: center;
 }
 
 .itinerary-item.city-item {
@@ -238,105 +246,114 @@ body {
     font-weight: 500;
 }
 .itinerary-item.active.city-item {
-    border-left-color: #0056b3; /* Darker blue for active city */
+    border-left-color: #0056b3; 
 }
 .itinerary-item.active.route-item {
-    border-left-color: #c65e0a; /* Darker orange for active route */
+    border-left-color: #c65e0a; 
 }
 
 .itinerary-item .item-title {
     font-weight: 500;
     color: #343a40;
     flex-grow: 1;
+    line-height: 1.3; /* Improved line height for mobile */
 }
 .itinerary-item .item-date {
-    font-size: 0.85em;
+    font-size: 0.8em; /* Adjusted for mobile */
     color: #6c757d;
+    white-space: nowrap;
 }
 
 #item-details-section {
-    /* This will be shown/hidden by JS. When shown, it should fill the panel-content-area */
     height: 100%;
-    display: flex; /* Using flex to manage children views */
+    display: flex; 
     flex-direction: column;
 }
-#item-details-section > div { /* Direct children: city-info-view, route-info-view */
-    flex-grow: 1; /* Allow the active view to fill space */
-    overflow-y: auto; /* Make individual views scrollable */
-    padding: 15px; /* Add padding inside views */
+#item-details-section > div { 
+    flex-grow: 1; 
+    overflow-y: auto; 
+    padding: 10px; /* Base padding, adjusted */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 
-#item-details-section h4 { /* Titles within city/route view */
-    font-size: 1.25em;
+#item-details-section h4 { 
+    font-size: 1.15em; /* Adjusted for mobile */
     color: #0056b3;
     margin-top: 0;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
+    margin-bottom: 10px; /* Adjusted for mobile */
+    padding-bottom: 6px; /* Adjusted for mobile */
     border-bottom: 1px solid #b3d1ff;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px; /* Adjusted for mobile */
     flex-shrink: 0;
 }
 #item-details-section p {
-    font-size: 0.9em;
+    font-size: 0.85em; /* Adjusted for mobile */
     color: #333;
-    margin: 8px 0;
-    line-height: 1.5;
+    margin: 6px 0; /* Adjusted for mobile */
+    line-height: 1.4; /* Adjusted for mobile */
 }
 #item-details-section p strong {
     color: #004a99;
     font-weight: 500;
 }
 #item-details-section p strong i {
-    margin-right: 6px;
+    margin-right: 5px; /* Adjusted for mobile */
     color: #007bff;
-    width: 16px;
+    width: 14px; /* Adjusted for mobile */
     text-align: center;
 }
 
 #route-info-view {
     background-color: #f0f6ff;
-    border-radius: 8px;
+    border-radius: 6px; /* Adjusted for mobile */
     border: 1px solid #cce0ff;
 }
 #city-info-view {
     background-color: #e6ffed;
-    border-radius: 8px;
+    border-radius: 6px; /* Adjusted for mobile */
     border: 1px solid #c3e6cb;
-    display: flex; /* Allow city info to be flex column for scrolling tabs */
+    display: flex; 
     flex-direction: column;
 }
 #city-info-view h4 {
     color: #155724;
     border-bottom-color: #abdde5;
 }
-.tab-navigation {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 15px;
-    margin-bottom: 15px;
+
+.tab-navigation-container {
+    overflow-x: auto; /* Allow horizontal scrolling for tabs if they overflow */
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 10px; /* Space below tabs */
     border-bottom: 1px solid #dee2e6;
     flex-shrink: 0;
 }
+.tab-navigation {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent tabs from wrapping, rely on scroll */
+    /* margin-top: 10px; Removed, margin now on container */
+    /* margin-bottom: 10px; Removed, margin now on container */
+}
 
 .tab-button {
-    padding: 10px 15px;
+    padding: 8px 12px; /* Adjusted for mobile */
     cursor: pointer;
     border: none;
     background-color: transparent;
-    font-size: 0.9em;
+    font-size: 0.85em; /* Adjusted for mobile */
     font-weight: 500;
     color: #6c757d;
-    border-bottom: 3px solid transparent;
-    margin-right: 5px;
+    border-bottom: 2px solid transparent; /* Adjusted for mobile */
+    margin-right: 3px; /* Adjusted for mobile */
     transition: color 0.2s ease, border-bottom-color 0.2s ease;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px; /* Adjusted for mobile */
+    white-space: nowrap; /* Keep tab text on one line */
 }
-.tab-button i { font-size: 1em; }
+.tab-button i { font-size: 0.95em; } /* Adjusted for mobile */
 .tab-button:hover { color: #007bff; }
 .tab-button.active {
     color: #007bff;
@@ -345,23 +362,24 @@ body {
 }
 
 .tab-content {
-    flex-grow: 1; /* Allow tab content to fill remaining space in city view */
-    overflow-y: auto; /* Make tab content scrollable */
+    flex-grow: 1; 
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch;
 }
-.tab-content .tab-pane { display: none; animation: fadeIn 0.3s ease-in-out; }
+.tab-content .tab-pane { display: none; animation: fadeIn 0.3s ease-in-out; padding-top: 5px; }
 .tab-content .tab-pane.active { display: block; }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .tab-pane ul { list-style-type: none; padding-left: 0; margin: 0; }
 .tab-pane ul li {
-    padding: 8px 0;
-    font-size: 0.9em;
+    padding: 7px 0; /* Adjusted for mobile */
+    font-size: 0.85em; /* Adjusted for mobile */
     color: #495057;
-    line-height: 1.6;
+    line-height: 1.5; /* Adjusted for mobile */
     border-bottom: 1px dashed #f1f3f5;
 }
 .tab-pane ul li:last-child { border-bottom: none; }
@@ -369,42 +387,166 @@ body {
 
 #no-item-selected p {
     text-align: center;
-    font-size: 1em;
+    font-size: 0.9em; /* Adjusted for mobile */
     color: #6c757d;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f0f2f5; /* Slightly different background */
-    border-radius: 6px;
+    margin-top: 15px; /* Adjusted for mobile */
+    padding: 12px; /* Adjusted for mobile */
+    background-color: #f0f2f5; 
+    border-radius: 5px; /* Adjusted for mobile */
 }
 
 .hidden { display: none !important; }
 
-.leaflet-popup-content-wrapper { background: #ffffff; color: #333; border-radius: 8px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); }
-.leaflet-popup-content { margin: 15px; font-size: 0.9em; line-height: 1.5; }
+.leaflet-popup-content-wrapper { background: #ffffff; color: #333; border-radius: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); } /* Adjusted */
+.leaflet-popup-content { margin: 12px; font-size: 0.85em; line-height: 1.4; } /* Adjusted */
 .leaflet-popup-content b { font-weight: 600; color: #007bff;}
 
-@media (max-width: 1200px) {
-    .app-container { flex-direction: column; height: auto; max-height: none; }
-    #map-container { height: 50vh; min-height: 300px; border-right: none; border-bottom: 1px solid #dee2e6; }
-    #info-panel { flex: none; height: auto; max-height: calc(50vh - 20px); } /* Adjusted max-height */
+
+/* --- DESKTOP ADJUSTMENTS --- */
+@media (min-width: 769px) {
+    #map-controls {
+        top: 15px;
+        left: 15px;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+    .map-type-selector label { font-size: 1.1em; margin-right: 8px; }
+    .map-type-selector select { padding: 6px 8px; font-size: 0.9em; border-radius: 5px;}
+    #loading-indicator { padding: 18px 30px; font-size: 1.05em; }
+    #info-panel { padding: 20px; }
+    .panel-header { 
+        margin-bottom: 15px; 
+        padding-bottom: 15px; 
+        gap: 10px;
+        flex-wrap: nowrap; /* Ensure no wrap on desktop */
+    }
+    .navigation-buttons { gap: 8px; }
+    .button-style { padding: 9px 14px; font-size: 0.85em; border-radius: 6px; gap: 6px;}
+    .button-style .button-text { display: inline; } /* Show text on desktop */
+    .button-style i { font-size: 0.95em; }
+    #itinerary-list-container h3 { font-size: 1.2em; margin-bottom: 10px; }
+    #itinerary-list { gap: 8px; padding: 10px; border-radius: 8px; }
+    .itinerary-item { padding: 10px 12px; border-radius: 6px; border-left-width: 4px; font-size: 0.9em; gap: 8px; }
+    .itinerary-item .item-date { font-size: 0.85em; }
+    #item-details-section > div { padding: 15px; }
+    #item-details-section h4 { font-size: 1.25em; margin-bottom: 12px; padding-bottom: 8px; gap: 8px; }
+    #item-details-section p { font-size: 0.9em; margin: 8px 0; line-height: 1.5; }
+    #item-details-section p strong i { margin-right: 6px; width: 16px; }
+    #route-info-view, #city-info-view { border-radius: 8px; }
+    .tab-navigation-container { margin-top: 15px; margin-bottom: 15px; }
+    .tab-button { padding: 10px 15px; font-size: 0.9em; border-bottom-width: 3px; margin-right: 5px; gap: 6px;}
+    .tab-pane ul li { padding: 8px 0; font-size: 0.9em; line-height: 1.6; }
+    #no-item-selected p { font-size: 1em; margin-top: 20px; padding: 15px; border-radius: 6px; }
 }
 
-@media (max-width: 768px) {
-    .panel-header { flex-wrap: wrap; gap: 10px; justify-content: center; } /* Center buttons on wrap */
-    #home-button { margin-right: 0; /* Reset margin for smaller screens */ }
-    .navigation-buttons { width: 100%; justify-content: space-around; order: 1; /* Nav buttons first */ }
-    #clear-cache-button { order: 2; margin-top: 5px; }
 
-    .button-style { font-size: 0.8em; padding: 8px 12px; } /* Slightly larger padding */
-    .tab-button { font-size: 0.85em; padding: 8px 10px; }
-    #itinerary-list-container h3 { font-size: 1.1em; }
-    #itinerary-list { max-height: none; /* Allow list to use available space or scroll within panel-content-area */ }
+/* --- MOBILE LAYOUT (Primary: stacked map and info panel) --- */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+        height: 100vh; /* Ensure it takes full viewport height */
+        max-height: 100vh; /* Override desktop max-height */
+    }
+    #map-container {
+        flex: none; /* Remove flex grow */
+        height: 40vh; /* Map takes a smaller portion */
+        min-height: 200px; /* Minimum height for map */
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+    #info-panel {
+        flex: 1; /* Info panel takes remaining space */
+        height: auto; /* Let flexbox determine height */
+        max-height: 60vh; /* Max height for info panel, allows map to be seen */
+        padding: 10px; /* Reduce padding for mobile */
+    }
+
+    .panel-header {
+        flex-wrap: wrap; /* Allow buttons to wrap */
+        justify-content: space-around; /* Better distribution for wrapped items */
+        gap: 5px;
+    }
+    #home-button { margin-right: 0; }
+    .navigation-buttons {
+        width: 100%;
+        justify-content: space-between; /* Space out prev/next */
+        order: 1; /* Nav buttons first in wrapped layout */
+        margin: 5px 0; /* Add some margin when wrapped */
+    }
+     #clear-cache-button {
+        order: 2;
+    }
+    /* On very small screens, hide button text to save space */
+    .button-style .button-text { display: none; }
+    .button-style i { margin-right: 0; } /* No margin if text is hidden */
+    .button-style { padding: 8px 10px; } /* Make buttons a bit smaller if icon only */
+
+
+    #itinerary-list-container h3 { font-size: 1.05em; }
     
-    #map-container { height: 45vh; }
-    #info-panel { max-height: calc(55vh - 20px); padding: 15px; }
-    #item-details-section h4 { font-size: 1.15em; }
-    #item-details-section p { font-size: 0.85em; }
-    #panel-content-area { /* Ensure this area doesn't cause overflow on small screens if children are too tall */
-        min-height: 0; /* Helps with flex item overflow */
+    #item-details-section h4 { font-size: 1.1em; }
+    #item-details-section p { font-size: 0.8em; }
+    #panel-content-area { 
+        min-height: 0; 
+    }
+
+    .tab-navigation-container {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .tab-button {
+        font-size: 0.8em;
+        padding: 7px 10px; /* Slightly smaller tabs */
+    }
+    .tab-button i { font-size: 0.9em; }
+}
+
+/* Further refinement for very small screens */
+@media (max-width: 480px) {
+    #map-container {
+        height: 35vh; /* Even less map height */
+        min-height: 180px;
+    }
+    #info-panel {
+        max-height: 65vh;
+        padding: 8px;
+    }
+    .panel-header {
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+    }
+
+    .button-style {
+        font-size: 0.75em;
+        padding: 7px 9px;
+        gap: 4px;
+    }
+    /* Ensure icon-only for very small screens */
+    .button-style .button-text { display: none !important; }
+    .button-style i { margin-right: 0 !important; }
+
+
+    #itinerary-list-container h3 { font-size: 1em; }
+    .itinerary-item {
+        padding: 7px 8px;
+        font-size: 0.8em;
+        gap: 5px;
+    }
+    .itinerary-item .item-date { font-size: 0.75em; }
+
+    #item-details-section h4 { font-size: 1em; gap: 5px; }
+    #item-details-section p { font-size: 0.75em; line-height: 1.35; }
+    #item-details-section p strong i { width: 12px; margin-right: 4px; }
+    
+    .map-type-selector label { font-size: 0.9em; margin-right: 4px;}
+    .map-type-selector select { padding: 4px 6px; font-size: 0.8em; }
+
+    .tab-button {
+        font-size: 0.75em; /* Even smaller tabs */
+        padding: 6px 8px;
+    }
+    .tab-pane ul li {
+        font-size: 0.8em;
+        padding: 6px 0;
     }
 }

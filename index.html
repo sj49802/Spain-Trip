@@ -36,12 +36,12 @@
         <div id="info-panel">
             <div class="panel-header">
                 <!-- Home, Prev, Next buttons will be controlled by JS for visibility -->
-                <button id="home-button" class="button-style nav-button hidden"><i class="fas fa-home"></i> Home</button>
+                <button id="home-button" class="button-style nav-button hidden"><i class="fas fa-home"></i> <span class="button-text">Home</span></button>
                 <div class="navigation-buttons">
-                    <button id="prev-item-button" class="button-style nav-button hidden"><i class="fas fa-chevron-left"></i> Prev</button>
-                    <button id="next-item-button" class="button-style nav-button hidden">Next <i class="fas fa-chevron-right"></i></button>
+                    <button id="prev-item-button" class="button-style nav-button hidden"><i class="fas fa-chevron-left"></i> <span class="button-text">Prev</span></button>
+                    <button id="next-item-button" class="button-style nav-button hidden"><span class="button-text">Next</span> <i class="fas fa-chevron-right"></i></button>
                 </div>
-                <button id="clear-cache-button" class="button-style"><i class="fas fa-trash-alt"></i> Clear Cache</button>
+                <button id="clear-cache-button" class="button-style"><i class="fas fa-trash-alt"></i> <span class="button-text">Clear Cache</span></button>
             </div>
             
             <!-- Container for dynamic content (either list or details) -->
@@ -58,13 +58,15 @@
                     <div id="city-info-view" class="hidden">
                         <h4><i class="fas fa-city"></i> <span id="active-city-name">City</span></h4>
                         <p><strong><i class="fas fa-calendar-alt"></i> Stay:</strong> <span id="city-stay-dates">N/A</span></p>
-                        <div class="tab-navigation">
-                            <button class="tab-button active" data-tab="sights"><i class="fas fa-landmark"></i> Sights</button>
-                            <button class="tab-button" data-tab="must-dos"><i class="fas fa-star"></i> Must-Do's</button>
-                            <button class="tab-button" data-tab="activities"><i class="fas fa-hiking"></i> Activities</button>
-                            <button class="tab-button" data-tab="food"><i class="fas fa-utensils"></i> Food</button>
-                            <button class="tab-button" data-tab="restaurants-bars"><i class="fas fa-wine-glass-alt"></i> Eat & Drink</button>
-                            <button class="tab-button" data-tab="tips"><i class="fas fa-lightbulb"></i> Tips</button>
+                        <div class="tab-navigation-container">
+                            <div class="tab-navigation">
+                                <button class="tab-button active" data-tab="sights"><i class="fas fa-landmark"></i> Sights</button>
+                                <button class="tab-button" data-tab="must-dos"><i class="fas fa-star"></i> Must-Do's</button>
+                                <button class="tab-button" data-tab="activities"><i class="fas fa-hiking"></i> Activities</button>
+                                <button class="tab-button" data-tab="food"><i class="fas fa-utensils"></i> Food</button>
+                                <button class="tab-button" data-tab="restaurants-bars"><i class="fas fa-wine-glass-alt"></i> Eat & Drink</button>
+                                <button class="tab-button" data-tab="tips"><i class="fas fa-lightbulb"></i> Tips</button>
+                            </div>
                         </div>
                         <div class="tab-content">
                             <div id="sights-content" class="tab-pane active"></div>
